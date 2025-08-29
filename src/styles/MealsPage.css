@@ -1,0 +1,52 @@
+.meals-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 0;
+}
+
+.meals-page-container h2 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  color: #5a5a5a;
+  text-align: center;
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(autofill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  width: 100%; /* revisar luego */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.meal-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* probar meter las imágenes después */
+  cursor: pointer;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.meal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+/* cuando probemos con las imágenes */
+.meal-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.meal-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.8rem 0.9rem;
+  text-align: center;
+  color: #666;
+}
