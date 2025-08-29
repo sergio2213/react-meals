@@ -3,6 +3,7 @@ import type { Category } from '../types/Category';
 import { getCategories } from '../services/apiService';
 import CategoryCard from '../components/CategoryCard';
 import { useNavigate } from 'react-router';
+import './../styles/HomePage.css';
 
 function HomePage() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -35,9 +36,9 @@ function HomePage() {
     return <CategoryCard key={category.idCategory} category={category} onClick={handleCategoryClick} />;
   });
   return (
-    <div>
+    <div className="home-page-container">
       <h2>Categories</h2>
-      {categoriesList}
+      <div className="categories-grid">{categoriesList}</div>
     </div>
   );
 }

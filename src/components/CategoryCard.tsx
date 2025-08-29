@@ -7,7 +7,7 @@ interface CategoryCardProps {
 
 function CategoryCard({ category, onClick }: CategoryCardProps) {
   return (
-    <div style={{ borderStyle: 'solid', margin: '0.3em' }} onClick={() => onClick(category.strCategory.toLowerCase())}>
+    <div className="category-card" onClick={() => onClick(category.strCategory.toLowerCase())}>
       <h3>{category.strCategory}</h3>
     </div>
   );
