@@ -1,0 +1,64 @@
+/* body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+} */
+
+/* Reseteo básico para todos los elementos */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para el cuerpo del documento */
+body {
+  font-family: sans-serif;
+  line-height: 1.5; /* Mejora la legibilidad */
+  -webkit-font-smoothing: antialiased; /* Suaviza el texto en navegadores basados en WebKit */
+  text-rendering: optimizeSpeed; /* Optimiza el renderizado del texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Elimina el estilo de los enlaces con un clic o toque */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Evita problemas de scroll si hay elementos muy largos */
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Elimina el estilo predeterminado en formularios */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Elimina la animación en usuarios que la han desactivado */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
