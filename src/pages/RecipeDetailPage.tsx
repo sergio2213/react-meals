@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import type { Recipe } from '../types/Recipe';
 import { getRecipeDetails } from '../services/apiService';
+import BackButton from '../components/BackButton';
+import './../styles/Button.css';
+import './../styles/RecipePage.css';
 
 function RecipeDetailPage() {
   const { mealId } = useParams<'mealId'>();
@@ -33,18 +36,20 @@ function RecipeDetailPage() {
   }
 
   return (
-    <div>
+    <div className="recipe-detail-container">
+      <BackButton />
       <h2>{recipe.strMeal}</h2>
-      <small>Category: {recipe.strCategory}</small>
-      <div>
-        <span>Ingredients:</span>
+      <p>Category: {recipe.strCategory}</p>
+      <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+      <div className="recipe-info">
+        <h3>Ingredients:</h3>
         <ul>
           {Object.keys(recipe).map((key) => {
             if (key.startsWith('strIngredient') && recipe[key]) {
               const ingredient = recipe[key];
               const measure = recipe[`strMeasure${key.slice(13)}`];
               return (
-                <li>
+                <li key={key}>
                   {ingredient}: {measure}
                 </li>
               );
@@ -54,7 +59,7 @@ function RecipeDetailPage() {
         <h3>Instructions</h3>
         <p>{recipe.strInstructions}</p>
         {recipe.strYoutube && (
-          <a href={recipe.strYoutube} target="_blank">
+          <a className="youtube-link" href={recipe.strYoutube} target="_blank">
             Link to video
           </a>
         )}
