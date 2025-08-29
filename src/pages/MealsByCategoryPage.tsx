@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router';
 import BackButton from '../components/BackButton';
 import './../styles/Button.css';
 import './../styles/MealsPage.css';
+import Spinner from '../components/Spinner';
 
 function MealsByCategoryPage() {
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -35,7 +36,7 @@ function MealsByCategoryPage() {
   }
 
   if (isLoading) {
-    return <div>Loading meals...</div>;
+    return <Spinner />;
   }
 
   return (

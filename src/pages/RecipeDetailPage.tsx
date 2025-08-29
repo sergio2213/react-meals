@@ -5,6 +5,7 @@ import { getRecipeDetails } from '../services/apiService';
 import BackButton from '../components/BackButton';
 import './../styles/Button.css';
 import './../styles/RecipePage.css';
+import Spinner from '../components/Spinner';
 
 function RecipeDetailPage() {
   const { mealId } = useParams<'mealId'>();
@@ -28,7 +29,7 @@ function RecipeDetailPage() {
   }, [mealId]);
 
   if (isLoading) {
-    return <div>Loading recipe...</div>;
+    return <Spinner />;
   }
 
   if (!recipe) {

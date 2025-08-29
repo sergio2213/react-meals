@@ -4,6 +4,7 @@ import { getCategories } from '../services/apiService';
 import CategoryCard from '../components/CategoryCard';
 import { useNavigate } from 'react-router';
 import './../styles/HomePage.css';
+import Spinner from '../components/Spinner';
 
 function HomePage() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -30,7 +31,7 @@ function HomePage() {
   }
 
   if (isLoading) {
-    return <div>Loading categories...</div>;
+    return <Spinner />;
   }
   const categoriesList = categories.map((category) => {
     return <CategoryCard key={category.idCategory} category={category} onClick={handleCategoryClick} />;
