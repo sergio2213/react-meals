@@ -10,6 +10,7 @@ import Spinner from '../components/Spinner';
 function MealsByCategoryPage() {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loadedImages, setLoadedImages] = useState<number>(0);
 
   const { categoryName } = useParams<'categoryName'>();
   const navigate = useNavigate();
@@ -35,7 +36,11 @@ function MealsByCategoryPage() {
     void navigate(`/recipe/${mealId}`);
   }
 
-  if (isLoading) {
+  function onImageLoad() {
+    setLoadedImages((prev) => prev + 1);
+  }
+
+  if (isLoading || meals.length < loadedImages) {
     return <Spinner />;
   }
 
@@ -47,7 +52,7 @@ function MealsByCategoryPage() {
         {meals && meals.length > 0 ? (
           meals.map((meal) => (
             <div className="meal-card" key={meal.idMeal} onClick={() => handleMealClick(meal.idMeal)}>
-              {meal.strMealThumb && <img src={meal.strMealThumb} alt={meal.strMeal} />}
+              {meal.strMealThumb && <img onLoad={onImageLoad} src={meal.strMealThumb} alt={meal.strMeal} />}
               <h3>{meal.strMeal}</h3>
             </div>
           ))
