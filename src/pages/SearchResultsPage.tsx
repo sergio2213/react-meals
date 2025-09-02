@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import type { Meal } from '../types/Meal';
-import { useNavigate, useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router';
 import { searchMealsByName } from '../services/apiService';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
+import MealCard from '../components/MealCard';
 
 function SearchResultsPage() {
   const [meals, setMeals] = useState<Meal[] | null>(null);
@@ -12,13 +13,11 @@ function SearchResultsPage() {
 
   const [searchParams] = useSearchParams();
   const mealName = searchParams.get('name') || '';
-  const navigate = useNavigate();
-
   useEffect(() => {
     async function fetchSearchResults() {
       try {
         const { meals } = await searchMealsByName(mealName);
-        setMeals(meals || []); // revisar luego
+        setMeals(meals || []);
       } catch (error: unknown) {
         console.log(error);
       } finally {
@@ -29,10 +28,6 @@ function SearchResultsPage() {
       void fetchSearchResults();
     }
   }, [mealName]);
-
-  function handleMealClick(mealId: string) {
-    void navigate(`/recipe/${mealId}`);
-  }
 
   function onImageLoad() {
     setLoadedImages((prev) => prev + 1);
@@ -50,10 +45,7 @@ function SearchResultsPage() {
       {meals && meals.length > 0 ? (
         <div className="meals-grid">
           {meals.map((meal) => (
-            <div className="meal-card" key={meal.idMeal} onClick={() => handleMealClick(meal.idMeal)}>
-              {meal.strMealThumb && <img onLoad={onImageLoad} src={meal.strMealThumb} alt={meal.strMeal} />}
-              <h3>{meal.strMeal}</h3>
-            </div>
+            <MealCard handleImageLoad={onImageLoad} meal={meal} key={meal.idMeal} />
           ))}
         </div>
       ) : (
