@@ -4,11 +4,13 @@ import { getCategories } from '../services/apiService';
 import CategoryCard from '../components/CategoryCard';
 import { useNavigate } from 'react-router';
 import './../styles/HomePage.css';
+import './../styles/SearchBar.css';
 import Spinner from '../components/Spinner';
 
 function HomePage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const navigate = useNavigate();
 
@@ -30,6 +32,12 @@ function HomePage() {
     void navigate(`/category/${categoryName}`);
   }
 
+  function handleSearch() {
+    if (searchTerm) {
+      void navigate(`/search?name=${searchTerm}`);
+    }
+  }
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -39,6 +47,19 @@ function HomePage() {
   return (
     <div className="home-page-container">
       <h2>Categories</h2>
+      <div className="search-bar">
+        <input
+          value={searchTerm}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
+          placeholder="Find a recipe"
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
       <div className="categories-grid">{categoriesList}</div>
     </div>
   );

@@ -28,3 +28,12 @@ export async function getRecipeDetails(idMeal: string): Promise<RecipeResponse> 
   }
   return (await response.json()) as RecipeResponse;
 }
+
+// buscar comidas por nombre
+export async function searchMealsByName(mealName: string) {
+  const response = await fetch(`${BASE_URL}/search.php?s=${mealName}`);
+  if (!response) {
+    throw new Error('Failed to fetch data');
+  }
+  return (await response.json()) as MealsResponse;
+}
