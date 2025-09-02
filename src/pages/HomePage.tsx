@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { Category } from '../types/Category';
-import { getCategories } from '../services/apiService';
+import { getCategories, getRandomMeal } from '../services/apiService';
 import CategoryCard from '../components/CategoryCard';
 import { useNavigate } from 'react-router';
 import './../styles/HomePage.css';
 import './../styles/SearchBar.css';
+import './../styles/RandomButton.css';
 import Spinner from '../components/Spinner';
 
 function HomePage() {
@@ -30,6 +31,20 @@ function HomePage() {
 
   function handleCategoryClick(categoryName: string) {
     void navigate(`/category/${categoryName}`);
+  }
+
+  async function handleRandomMeal() {
+    try {
+      const { meals } = await getRandomMeal();
+      const randomMeal = meals[0];
+      if (randomMeal && randomMeal.idMeal) {
+        void navigate(`/recipe/${randomMeal.idMeal}`);
+      } else {
+        console.log('No se pudo obtener la receta aleatoria');
+      }
+    } catch (error: unknown) {
+      console.log(error);
+    }
   }
 
   function handleSearch() {
@@ -60,6 +75,9 @@ function HomePage() {
         />
         <button onClick={handleSearch}>Search</button>
       </div>
+      <button onClick={() => void handleRandomMeal()} className="random-button">
+        Random recipe
+      </button>
       <div className="categories-grid">{categoriesList}</div>
     </div>
   );

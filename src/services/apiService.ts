@@ -37,3 +37,11 @@ export async function searchMealsByName(mealName: string) {
   }
   return (await response.json()) as MealsResponse;
 }
+
+export async function getRandomMeal() {
+  const response = await fetch(`${BASE_URL}/random.php`);
+  if (!response) {
+    throw new Error('Failed to fetch random data');
+  }
+  return (await response.json()) as MealsResponse;
+}
