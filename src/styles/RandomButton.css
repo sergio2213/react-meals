@@ -1,7 +1,7 @@
 .random-button {
   padding: 0.8rem 1.5rem;
   border: none;
-  background-color: #f4b400;
+  background-color: #28a745;
   color: #fff;
   border-radius: 8px;
   font-size: 1rem;
@@ -11,5 +11,5 @@
 }
 
 .random-button:hover {
-  background-color: #d8a000;
+  background-color: #218838;
 }
